@@ -16,15 +16,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("MessagesCORSPolicy",
-        builder =>
-        {
-            builder.WithOrigins("http://localhost:8001")
-                                    .AllowAnyHeader();
-        });
-});
+
 
 
 var app = builder.Build();
@@ -38,7 +30,7 @@ if (app.Environment.IsDevelopment())
 
 using (var serviceScope = app.Services.CreateScope())
 {
-   
+
     var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
     dbContext.Database.EnsureCreated();
 
@@ -47,17 +39,15 @@ using (var serviceScope = app.Services.CreateScope())
     {
         dbContext.Messages.AddRange(new[]
         {
-                new Message {Id="1",Content="Scence",CreatedOn=DateTime.UtcNow},
-                new Message {Id="2",Content="Sport",CreatedOn=DateTime.UtcNow},
-                new Message {Id="3",Content="Technical",CreatedOn=DateTime.UtcNow},
+                new Message {Id="1",Content="Scence",CreatedOn=DateTime.Now},
+                new Message {Id="2",Content="Sport",CreatedOn=DateTime.Now},
+                new Message {Id="3",Content="Technical",CreatedOn=DateTime.Now},
 
         });
 
         dbContext.SaveChanges();
     }
 }
-
-app.UseCors("MessagesCORSPolicy");
 
 app.UseHttpsRedirection();
    
