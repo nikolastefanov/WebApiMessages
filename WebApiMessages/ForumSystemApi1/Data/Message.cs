@@ -1,10 +1,15 @@
 ﻿namespace ForumSystemApi1.Data
 {
+    using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
     using System;
 
     public class Message
     {
-        public string? Id { get; set; }
+        public Message()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
+        public string Id { get; set; }
 
         public string? Content { get; set; }
 

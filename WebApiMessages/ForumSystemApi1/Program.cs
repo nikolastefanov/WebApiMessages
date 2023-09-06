@@ -17,11 +17,35 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+/*
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("MessagesCORSPolicy",
+        builder =>
+        {
+            builder.WithOrigins("http://127.0.0.1:5500/")
+                                    .AllowAnyHeader();
+        });
+});
+*/
+
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddCors(options =>
+    options.AddDefaultPolicy(polisy =>
+    {
+        polisy.AllowAnyOrigin()
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+
+    }));
+}
+
 
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configure the HTTP request pipeline.wq][qw
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -30,7 +54,7 @@ if (app.Environment.IsDevelopment())
 
 using (var serviceScope = app.Services.CreateScope())
 {
-
+   
     var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
     dbContext.Database.EnsureCreated();
 
@@ -39,9 +63,9 @@ using (var serviceScope = app.Services.CreateScope())
     {
         dbContext.Messages.AddRange(new[]
         {
-                new Message {Id="1",Content="Scence",CreatedOn=DateTime.Now},
-                new Message {Id="2",Content="Sport",CreatedOn=DateTime.Now},
-                new Message {Id="3",Content="Technical",CreatedOn=DateTime.Now},
+                new Message {User="Pesho",Content="Scence",CreatedOn=DateTime.UtcNow},
+                new Message {User="Ivan",Content="Sport",CreatedOn=DateTime.UtcNow},
+                new Message {User="Peter",Content="Technical",CreatedOn=DateTime.UtcNow},
 
         });
 
@@ -49,8 +73,12 @@ using (var serviceScope = app.Services.CreateScope())
     }
 }
 
+
+
 app.UseHttpsRedirection();
-   
+
+app.UseCors();
+
 app.UseAuthorization();
 
 app.MapControllers();
