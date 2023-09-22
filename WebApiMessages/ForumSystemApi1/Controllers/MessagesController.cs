@@ -35,10 +35,15 @@
         [Route("create")]
         public async Task<ActionResult> Create(MessageCreateBindingModel messageCreateBindingModel)
         {
+
+            var userFromDb = this.context.Users
+                .SingleOrDefault(user => user.Username == messageCreateBindingModel.User);
+
+
             Message message = new Message
             {
                 Content = messageCreateBindingModel.Content,
-                User = messageCreateBindingModel.User,
+                User = userFromDb,
                 CreatedOn = DateTime.UtcNow
             };
 

@@ -63,9 +63,9 @@ using (var serviceScope = app.Services.CreateScope())
     {
         dbContext.Messages.AddRange(new[]
         {
-                new Message {User="Pesho",Content="Scence",CreatedOn=DateTime.UtcNow},
-                new Message {User="Ivan",Content="Sport",CreatedOn=DateTime.UtcNow},
-                new Message {User="Peter",Content="Technical",CreatedOn=DateTime.UtcNow},
+                new Message {User=new User{Username="Pesho" },Content="Scence",CreatedOn=DateTime.UtcNow},
+                new Message {User=new User{Username="Ivan" },Content="Sport",CreatedOn=DateTime.UtcNow},
+                new Message {User=new User{Username="Peter" }, Content="Technical",CreatedOn=DateTime.UtcNow},
 
         });
 
