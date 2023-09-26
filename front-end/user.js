@@ -97,3 +97,29 @@ function logout(){
 
     togleLogin()
 }
+
+function saveToken(token) {
+    localStorage.setItem('auth_token', token);
+}
+
+function evictToken() {
+    localStorage.removeItem('auth_token', token);
+}
+
+function getUser() {
+    let token = localStorage.getItem('auth_token');
+
+    let claims = token.split('.')[1];
+    let decodedClaims = atob(claims);
+    let parsedClaims = JSON.parse(decodedClaims);
+
+    // return parsedClaims.name;
+}
+
+function isLoggedIn() {
+    return localStorage.getItem('auth_token') != null;
+}
+
+
+$('#logged-in-data').hide();
+toggleLogin();

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0xjT1uKb7FKZHXjNroN785jbe+v1RkRfmsFCxVYze6wNOxQGVQ29LWoL5ThYgY+7d2pR9CVpDbj1bihDFmFKyg==",
+  "dgSpecHash": "45KL8LfAmkGcMLoq9U5bf9Szld9MI1qLXBfYb2KXrWbxLnFSQVIGe0i+TK5SM3vqrVcGxGWFVYaL6JyVUbENnw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\User\\Documents\\CSharp_Kurs\\ForumSystemApi\\ForumSystemApi7Token\\ForumSystemApi1\\ForumSystemApi1\\ForumSystemApi1.csproj",
+  "projectFilePath": "C:\\Users\\User\\Documents\\CSharp_Kurs\\ForumSystemApi\\ForunSystemApi8CreateJWT\\ForumSystemApi1\\ForumSystemApi1\\ForumSystemApi1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\User\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
