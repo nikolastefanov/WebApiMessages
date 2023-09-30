@@ -1,6 +1,8 @@
 const APP_SERVICE_URL=require('app.js')
 
 function login(){
+
+    
     let username=$('#username-login').val()
     let password=$('#password-login').val()
     let requestBody={
@@ -17,20 +19,41 @@ function login(){
 
     
     
-        // $.post({
-        //     url: APP_SERVICE_URL + 'users/login',
-        //     data: JSON.stringify(requestBody),
-        //     success: function (data) {
+         $.post({
+             url: APP_SERVICE_URL + 'users/login',
+             data: JSON.stringify(requestBody),
+             success: function (data) {
+
+                $('#guest-navbar').hide()
+                $('#caption').text('Welcome to Chat-Jue!')
+
+                console.log(data)
+
+                hideGuestNavbar()
+
+                let token=data.rawHeader
+                   +'.'
+                   +data.rawPayload
+                   +'.'
+                   +data.Signature;
+
+                   saveToken(token)
+
+                   $('#username-logged-in').text(getUser)
+
+                   hideLoginAndRegisterAndShowLoggedInData()
+
+
         //         // CHANGE CAPTION TO 'Welcome to Chat-Inc!'
         //         // Save token to localStorage using saveToken()
         //         // EXTRACT FROM JWT TOKEN currently logged in user's username
         //         // Logged-in-data visualize
         //         // Hide Guest Navbar
-        //     },
-        //     error: function (error) {
-        //         console.error(error);
-        //     }
-        // });
+             },
+             error: function (error) {
+                 console.error(error);
+            }
+         });
 }
 
 
@@ -113,7 +136,7 @@ function getUser() {
     let decodedClaims = atob(claims);
     let parsedClaims = JSON.parse(decodedClaims);
 
-    // return parsedClaims.name;
+    return parsedClaims.nameid;
 }
 
 function isLoggedIn() {
@@ -123,3 +146,18 @@ function isLoggedIn() {
 
 $('#logged-in-data').hide();
 toggleLogin();
+
+
+
+function hideGuestNavbar(){
+    $('#guest-navbar')
+        .removeClass('d-block')
+        .addClass('d-none')
+}
+
+
+function showGuestNavbar(){
+    $('#guest-navbar')
+        .removeClass('d-none')
+        .addClass('d-block')
+}
