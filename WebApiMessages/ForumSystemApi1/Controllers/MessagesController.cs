@@ -21,8 +21,8 @@
             this.context = context;
         }
 
-        [HttpGet(Name = "All")]
-        [Route("all")]
+        [HttpGet]
+        [Route("/all")]
         public async Task<ActionResult<IEnumerable<Message>>> AllOrderedByCreatedOnAscending()
         {
             return this.context.Messages
@@ -31,8 +31,8 @@
         }
         
 
-        [HttpPost(Name = "Create")]
-        [Route("create")]
+        [HttpPost]
+        [Route("/create")]
         public async Task<ActionResult> Create(MessageCreateBindingModel messageCreateBindingModel)
         {
 

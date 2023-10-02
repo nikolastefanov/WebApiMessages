@@ -1,6 +1,10 @@
 ﻿using ForumSystemApi1.Data;
 using ForumSystemApi1.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace ForumSystemApi1.Controllers
 {
@@ -34,7 +38,8 @@ namespace ForumSystemApi1.Controllers
                 }
         */
 
-        [HttpPost("register")]
+        [HttpPost]
+        [Route("/register")]
         public ActionResult Register([FromBody] UsersBindingModel usersBindingModel)
         {
             if (usersBindingModel == null)
@@ -76,7 +81,8 @@ namespace ForumSystemApi1.Controllers
         }
         */
 
-        [HttpPost("login")]
+        [HttpPost]
+        [Route("/login")]
         public ActionResult Login([FromBody] UsersBindingModel usersBindingModel)
         {
 
@@ -85,15 +91,39 @@ namespace ForumSystemApi1.Controllers
                 return this.BadRequest("Username or password is invalid.");
             }
 
-            // var tokenHandler =   TODO:
+            var tokenHandler = new JwtSecurityTokenHandler();
 
-            return this.Ok();
+            var key = Encoding.ASCII.GetBytes(this.jwtSettings.Secret);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject=new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.NameIdentifier,User.Identities.ToString())
+                }),
+                Expires=DateTime.UtcNow.AddDays(7),
+                SigningCredentials=new SigningCredentials(
+                    new SymmetricSecurityKey(key),
+                    SecurityAlgorithms.HmacSha256Signature
+                    )
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+
+            //return this.Ok();
+
+            return Ok(tokenHandler.WriteToken(token));
+
+            
 
         }
 
+
+        [HttpGet]
+        [Route("/getme")]
         public async Task<ActionResult> GetMe()
         {
-            return this.Ok(this.Users.FindFirst(claimTypes.NameIdentifier).value);
+            return this.Ok(User.FindFirst(ClaimTypes.NameIdentifier).Value);
         }
 
     }
