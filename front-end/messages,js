@@ -59,7 +59,7 @@ function renderMessages(data){
 
 
 function createMessage(){
-    let username=currentUsername
+   // let username=currentUsername
     let message=$('#message').val()
 
     if (username==null) {
@@ -72,6 +72,7 @@ function createMessage(){
         return
     }
 
+    let username = getUser();
 
     $.post({
         url:appUrl+'messages/create',

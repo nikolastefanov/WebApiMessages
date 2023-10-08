@@ -1,10 +1,14 @@
-const APP_SERVICE_URL=require('app.js')
+//const APP_SERVICE_URL=require('app.js')
 
 function login(){
 
     
     let username=$('#username-login').val()
     let password=$('#password-login').val()
+
+    $('#username-login').val('')
+    $('#password-login').val('')
+
     let requestBody={
         username:username,
         password:password
@@ -20,11 +24,16 @@ function login(){
     
     
          $.post({
-             url: APP_SERVICE_URL + 'users/login',
+             url: APP_SERVICE_URL+'users/login',
+             headers:{'Content-Type':'application/json'},
              data: JSON.stringify(requestBody),
              success: function (data) {
 
-                $('#guest-navbar').hide()
+               // $('#guest-navbar').removeClass('d-flex')
+               // $('#guest-navbar').addClass('d-none')
+
+              hideGuestNavbar()
+
                 $('#caption').text('Welcome to Chat-Jue!')
 
                 console.log(data)
@@ -35,11 +44,13 @@ function login(){
                    +'.'
                    +data.rawPayload
                    +'.'
-                   +data.Signature;
+                   +data.rawSignature;
+
+                    // console.log(token)
 
                    saveToken(token)
 
-                   $('#username-logged-in').text(getUser)
+                   $('#username-logged-in').text(getUser())
 
                    hideLoginAndRegisterAndShowLoggedInData()
 
@@ -59,7 +70,7 @@ function login(){
 
 function register() {
     let username = $('#username-register').val();
-    let password = $('#password-password').val();
+    let password = $('#password-register').val();
 
     $('#username-register').val('');
     $('#password-password').val('');
@@ -69,11 +80,41 @@ function register() {
         password: password
     };
 
+ console.log(requestBody)
+
+/*
+ $.post({
+    url:appUrl+'messages/create',
+    headers:{
+        'Content-Type':'application/json'
+    },
+    data:JSON.stringify({
+        content:message,
+        user:username
+    }),
+    succes:function(data){
+        loadMessages()
+    },
+    error: function(error){
+        console.log(error)
+    }
+})
+*/
+
+fetch('https://localhost:44311/api/users/allUsers')
+.then((data)=>data.json())
+.then(data=>console.log(data))
+.catch(e=>console.log(e))
+
+/*
     $.post({
-        url: APP_SERVICE_URL + 'users/register',
-        data: JSON.stringify(requestBody),
+        //url: APP_SERVICE_URL+ 'users/register',
+        url: 'https://localhost:44311/api/users/register',
+        headers:{'Content-Type':'application/json'},
+        data: JSON.stringify({requestBody}),
         success: function (data) {
-            // toggleLogin();
+            console.log(...data)
+             togleLogin();
         },
         error: function (error) {
             console.error(error);
@@ -81,7 +122,25 @@ function register() {
     });
 }
 
+*/
 
+
+fetch('https://localhost:44311/api/users/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        requestBody
+      }),
+     
+    }).then(promise => {
+      console.log(promise)
+      return promise.json()
+    }).then(response => {
+      //console.log(...data)
+    })
+}
 
 
 function togleLogin(){
@@ -99,14 +158,14 @@ function hideLoginAndRegisterAndShowLoggedInData() {
 
 
 function showLoginAndHideLoggedInData() {
-    toggleLogin();
+    togleLogin();
 
     $('#logged-in-data').hide();
 }
 
 
 function togleRegister(){
-    $('#login-data').hide()()
+    $('#login-data').hide()
     $('#register-data').show()
 }
 
@@ -115,7 +174,12 @@ function logout(){
 
     //TODO: copy functionality described in the Exercise
 
+    $('#caption').text('Choose your username to begin chatting!');
 
+    showGuestNavbar()
+
+    showLoginAndRegisterAndHideLoggedInData();
+    
     $('#logged-in-data').hide()
 
     togleLogin()
@@ -133,11 +197,13 @@ function getUser() {
     let token = localStorage.getItem('auth_token');
 
     let claims = token.split('.')[1];
-    let decodedClaims = atob(claims);
+    let decodedClaims = btoa(claims);
     let parsedClaims = JSON.parse(decodedClaims);
 
     return parsedClaims.nameid;
 }
+
+// pred auth-token  ima key-dve to4ki 1111111111111111
 
 function isLoggedIn() {
     return localStorage.getItem('auth_token') != null;
@@ -145,7 +211,7 @@ function isLoggedIn() {
 
 
 $('#logged-in-data').hide();
-toggleLogin();
+togleLogin();
 
 
 
@@ -161,3 +227,7 @@ function showGuestNavbar(){
         .removeClass('d-none')
         .addClass('d-block')
 }
+
+
+$('#logged-in-data').hide();
+togleLogin()

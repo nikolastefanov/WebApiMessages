@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Documents\\CSharp_Kurs\\ForumSystemApi\\10_ForumSystemApi10Json\\ForumSystemApi1\\ForumSystemApi1\\ForumSystemApi1.csproj": {}
+    "C:\\Users\\User\\Documents\\CSharp_Kurs\\ForumSystemApi\\13ForumSystemApiVideo\\ForumSystemApi1\\ForumSystemApi1\\ForumSystemApi1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Documents\\CSharp_Kurs\\ForumSystemApi\\10_ForumSystemApi10Json\\ForumSystemApi1\\ForumSystemApi1\\ForumSystemApi1.csproj": {
+    "C:\\Users\\User\\Documents\\CSharp_Kurs\\ForumSystemApi\\13ForumSystemApiVideo\\ForumSystemApi1\\ForumSystemApi1\\ForumSystemApi1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Documents\\CSharp_Kurs\\ForumSystemApi\\10_ForumSystemApi10Json\\ForumSystemApi1\\ForumSystemApi1\\ForumSystemApi1.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Documents\\CSharp_Kurs\\ForumSystemApi\\13ForumSystemApiVideo\\ForumSystemApi1\\ForumSystemApi1\\ForumSystemApi1.csproj",
         "projectName": "ForumSystemApi1",
-        "projectPath": "C:\\Users\\User\\Documents\\CSharp_Kurs\\ForumSystemApi\\10_ForumSystemApi10Json\\ForumSystemApi1\\ForumSystemApi1\\ForumSystemApi1.csproj",
+        "projectPath": "C:\\Users\\User\\Documents\\CSharp_Kurs\\ForumSystemApi\\13ForumSystemApiVideo\\ForumSystemApi1\\ForumSystemApi1\\ForumSystemApi1.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Documents\\CSharp_Kurs\\ForumSystemApi\\10_ForumSystemApi10Json\\ForumSystemApi1\\ForumSystemApi1\\obj\\",
+        "outputPath": "C:\\Users\\User\\Documents\\CSharp_Kurs\\ForumSystemApi\\13ForumSystemApiVideo\\ForumSystemApi1\\ForumSystemApi1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -88,7 +89,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

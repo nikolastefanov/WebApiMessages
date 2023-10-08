@@ -1,6 +1,7 @@
 ﻿using ForumSystemApi1.Data;
 using ForumSystemApi1.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -9,9 +10,9 @@ using System.Text;
 namespace ForumSystemApi1.Controllers
 {
 
-    [Route("api/[controller")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : Controller
+    public class UsersController : ControllerBase
     {
         private readonly ApplicationDbContext context;
         private readonly JwtSettings jwtSettings;
@@ -39,7 +40,7 @@ namespace ForumSystemApi1.Controllers
         */
 
         [HttpPost]
-        [Route("/register")]
+        [Route("register")]
         public ActionResult Register([FromBody] UsersBindingModel usersBindingModel)
         {
             if (usersBindingModel == null)
@@ -47,7 +48,7 @@ namespace ForumSystemApi1.Controllers
                 throw new ArgumentNullException(nameof(usersBindingModel.Username));
             }
 
-            this.context.Users.Add(new Data.User
+            this.context.Users.Add(new User
             {
                 Username = usersBindingModel.Username,
                 Password = usersBindingModel.Password
@@ -82,7 +83,7 @@ namespace ForumSystemApi1.Controllers
         */
 
         [HttpPost]
-        [Route("/login")]
+        [Route("login")]
         public ActionResult Login([FromBody] UsersBindingModel usersBindingModel)
         {
 
@@ -112,15 +113,24 @@ namespace ForumSystemApi1.Controllers
 
             //return this.Ok();
 
-            return Ok(tokenHandler.WriteToken(token));
+            return this.Ok(tokenHandler.WriteToken(token));
 
             
 
         }
 
+        [HttpGet]
+        [Route("allUsers")]
+        public ActionResult<IEnumerable<User>> AllUsers()
+        {
+            return this.context.Users.ToList();
+
+        }
+
+
 
         [HttpGet]
-        [Route("/getme")]
+        [Route("getme")]
         public async Task<ActionResult> GetMe()
         {
             return this.Ok(User.FindFirst(ClaimTypes.NameIdentifier).Value);

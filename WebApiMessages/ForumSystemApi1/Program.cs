@@ -23,12 +23,14 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectio
 var jwtSettingsSection=builder.Configuration.GetSection("JwtSettings");
 builder.Services.Configure<JwtSettings>(jwtSettingsSection);
 
+//var jwtSettings = jwtSettingsSection.Get<JwtSettings>();
 
 var jwtSettings = jwtSettingsSection.Get<JwtSettings>();
+
 var key = Encoding.ASCII.GetBytes(jwtSettings.Secret);
 
 var signingKey = new SymmetricSecurityKey(Encoding.UTF8
-    .GetBytes(builder.Configuration["JwtSettings:Secret"]));
+    .GetBytes(builder.Configuration["JwtSettings:Secret"]));    //jwtSettings.Secret
 
 builder.Services.Configure<TokenProviderOptions>(options=>
 {
@@ -71,6 +73,7 @@ if (builder.Environment.IsDevelopment())
     }));
 }
 
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -111,9 +114,9 @@ using (var serviceScope = app.Services.CreateScope())
     {
         dbContext.Messages.AddRange(new[]
         {
-                new Message {User=new User{Username="Pesho" },Content="Scence",CreatedOn=DateTime.UtcNow},
-                new Message {User=new User{Username="Ivan" },Content="Sport",CreatedOn=DateTime.UtcNow},
-                new Message {User=new User{Username="Peter" }, Content="Technical",CreatedOn=DateTime.UtcNow},
+                new Message {User=new User{Username="Pesho",Password="123"},Content="Scence",CreatedOn=DateTime.UtcNow},
+                new Message {User=new User{Username="Ivan" ,Password="456"},Content="Sport",CreatedOn=DateTime.UtcNow},
+                new Message {User=new User{Username="Peter" ,Password="789"}, Content="Technical",CreatedOn=DateTime.UtcNow},
 
         });
 
@@ -134,5 +137,12 @@ app.UseAuthorization();
 
 
 app.MapControllers();
+
+/*
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
+*/
 
 app.Run();

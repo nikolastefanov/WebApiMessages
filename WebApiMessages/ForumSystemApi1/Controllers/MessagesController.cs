@@ -21,8 +21,8 @@
             this.context = context;
         }
 
-        [HttpGet]
-        [Route("/all")]
+        [HttpGet(Name = "All")]
+        [Route("all")]
         public async Task<ActionResult<IEnumerable<Message>>> AllOrderedByCreatedOnAscending()
         {
             return this.context.Messages
@@ -31,10 +31,14 @@
         }
         
 
-        [HttpPost]
-        [Route("/create")]
+        [HttpPost(Name = "Create")]
+        [Route("create")]
         public async Task<ActionResult> Create(MessageCreateBindingModel messageCreateBindingModel)
         {
+
+            // createMessage da vzima token  !!!!!!!
+
+            // var username= this.User.FindFirst()
 
             var userFromDb = this.context.Users
                 .SingleOrDefault(user => user.Username == messageCreateBindingModel.User);

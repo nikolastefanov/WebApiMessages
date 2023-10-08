@@ -1,5 +1,9 @@
+let currentUsername = null;
+
 const appUrl='https://localhost:44311/api/'
 
+
+/*
 let currentUsername=null
 
 const Url=appUrl+'messages/all'
@@ -29,7 +33,7 @@ function resetUsername(){
     $('#reset-data').hide()
 
 }
-
+*/
 
 
 /*
