@@ -36,10 +36,6 @@
         public async Task<ActionResult> Create(MessageCreateBindingModel messageCreateBindingModel)
         {
 
-            // createMessage da vzima token  !!!!!!!
-
-            // var username= this.User.FindFirst()
-
             var userFromDb = this.context.Users
                 .SingleOrDefault(user => user.Username == messageCreateBindingModel.User);
 

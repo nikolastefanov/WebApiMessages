@@ -7394,11 +7394,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Documents\\CSharp_Kurs\\ForumSystemApi\\13ForumSystemApiVideo\\ForumSystemApi1\\ForumSystemApi1\\ForumSystemApi1.csproj",
+      "projectUniqueName": "C:\\Users\\User\\Documents\\CSharp_Kurs\\ForumSystemApi\\12_ForumSystemApi12jQuery\\ForumSystemApi1\\ForumSystemApi1\\ForumSystemApi1.csproj",
       "projectName": "ForumSystemApi1",
-      "projectPath": "C:\\Users\\User\\Documents\\CSharp_Kurs\\ForumSystemApi\\13ForumSystemApiVideo\\ForumSystemApi1\\ForumSystemApi1\\ForumSystemApi1.csproj",
+      "projectPath": "C:\\Users\\User\\Documents\\CSharp_Kurs\\ForumSystemApi\\12_ForumSystemApi12jQuery\\ForumSystemApi1\\ForumSystemApi1\\ForumSystemApi1.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\Documents\\CSharp_Kurs\\ForumSystemApi\\13ForumSystemApiVideo\\ForumSystemApi1\\ForumSystemApi1\\obj\\",
+      "outputPath": "C:\\Users\\User\\Documents\\CSharp_Kurs\\ForumSystemApi\\12_ForumSystemApi12jQuery\\ForumSystemApi1\\ForumSystemApi1\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

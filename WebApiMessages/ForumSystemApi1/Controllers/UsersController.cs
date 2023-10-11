@@ -48,7 +48,7 @@ namespace ForumSystemApi1.Controllers
                 throw new ArgumentNullException(nameof(usersBindingModel.Username));
             }
 
-            this.context.Users.Add(new User
+            this.context.Users.Add(new Data.User
             {
                 Username = usersBindingModel.Username,
                 Password = usersBindingModel.Password

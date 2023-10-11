@@ -25,12 +25,11 @@ function login(){
     
          $.post({
              url: APP_SERVICE_URL+'users/login',
-             headers:{'Content-Type':'application/json'},
              data: JSON.stringify(requestBody),
              success: function (data) {
 
-               // $('#guest-navbar').removeClass('d-flex')
-               // $('#guest-navbar').addClass('d-none')
+                $('#guest-navbar').removeClass('d-flex')
+                $('#guest-navbar').addClass('d-none')
 
               hideGuestNavbar()
 
@@ -101,15 +100,8 @@ function register() {
 })
 */
 
-fetch('https://localhost:44311/api/users/allUsers')
-.then((data)=>data.json())
-.then(data=>console.log(data))
-.catch(e=>console.log(e))
-
-/*
     $.post({
-        //url: APP_SERVICE_URL+ 'users/register',
-        url: 'https://localhost:44311/api/users/register',
+        url: APP_SERVICE_URL + 'users/register',
         headers:{'Content-Type':'application/json'},
         data: JSON.stringify({requestBody}),
         success: function (data) {
@@ -122,18 +114,15 @@ fetch('https://localhost:44311/api/users/allUsers')
     });
 }
 
-*/
-
-
-fetch('https://localhost:44311/api/users/register', {
+/*
+fetch(APP_SERVICE_URL + 'users/register', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
       body: JSON.stringify({
         requestBody
       }),
-     
+      headers: {
+        'Content-Type': 'application/json'
+      }
     }).then(promise => {
       console.log(promise)
       return promise.json()
@@ -141,7 +130,7 @@ fetch('https://localhost:44311/api/users/register', {
       //console.log(...data)
     })
 }
-
+*/
 
 function togleLogin(){
     $('#login-data').show()
@@ -178,7 +167,7 @@ function logout(){
 
     showGuestNavbar()
 
-    showLoginAndRegisterAndHideLoggedInData();
+    showLoginAndHideLoggedInData();
     
     $('#logged-in-data').hide()
 
@@ -197,13 +186,11 @@ function getUser() {
     let token = localStorage.getItem('auth_token');
 
     let claims = token.split('.')[1];
-    let decodedClaims = btoa(claims);
+    let decodedClaims = atob(claims);
     let parsedClaims = JSON.parse(decodedClaims);
 
     return parsedClaims.nameid;
 }
-
-// pred auth-token  ima key-dve to4ki 1111111111111111
 
 function isLoggedIn() {
     return localStorage.getItem('auth_token') != null;

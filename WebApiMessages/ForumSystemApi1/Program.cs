@@ -30,7 +30,7 @@ var jwtSettings = jwtSettingsSection.Get<JwtSettings>();
 var key = Encoding.ASCII.GetBytes(jwtSettings.Secret);
 
 var signingKey = new SymmetricSecurityKey(Encoding.UTF8
-    .GetBytes(builder.Configuration["JwtSettings:Secret"]));    //jwtSettings.Secret
+    .GetBytes(builder.Configuration["JwtSettings:Secret"]));
 
 builder.Services.Configure<TokenProviderOptions>(options=>
 {
